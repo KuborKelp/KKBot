@@ -96,7 +96,6 @@ def daily_kelpium(member_info):
         values = f"({member_id},{daily_kelpium},{time})"
         Datebase.insert(name_db=name_db, table=table, key=key, values=values)
 
-
     else:
         daily_kelpium = result[0][1]
     return daily_kelpium
