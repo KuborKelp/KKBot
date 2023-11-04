@@ -22,6 +22,7 @@ import random
 def _info():
     headers = ["#kp", "#kelpium", "#give", "#pk", "#beg"]
     s_headers = ["donate", "accept", "reject", "shot"]  # s_headers = None  捕捉特殊消息
+    return [headers, s_headers]
 
 
 # 初始化
