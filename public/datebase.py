@@ -12,6 +12,12 @@ def mergy_path_db(name: str, path=PATH):
 
 
 def initialize(name: str, path=PATH):
+    """
+
+    :param name: 数据库文件名 xxx.db
+    :param path: 指定路径保存，默认路径:PATH = "./database/"
+    :return: no return
+    """
     path_db = mergy_path_db(name, path)
     if not os.path.exists(path):
         os.makedirs(path)
@@ -20,7 +26,14 @@ def initialize(name: str, path=PATH):
             pass
 
 
-def create_table(name: str, path=PATH, table=None):
+def create_table(name: str, table: list, path=PATH):
+    """
+
+    :param name: 数据库文件名 xxx.db
+    :param path: 指定路径保存，默认路径:PATH = "./database/"
+    :param table: 例:COINS(ID INT, COINS INT default 0)
+    :return: no return
+    """
     if table is None:
         table = []
     path_db = mergy_path_db(name, path)
@@ -29,6 +42,7 @@ def create_table(name: str, path=PATH, table=None):
     cursor = conn.cursor()
     for t in table:
         cmd = "CREATE TABLE IF NOT EXISTS " + t
+        print(cmd)
         cursor.execute(cmd)
         conn.commit()
 

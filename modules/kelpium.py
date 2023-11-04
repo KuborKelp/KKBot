@@ -12,6 +12,7 @@ s_headers:
     shot
 '''
 
+import public.datebase as Datebase
 
 # 必备的bot规范
 def _info():
@@ -22,6 +23,10 @@ def _info():
 
 # 初始化
 def _initialize():
+    Datebase.initialize("kelpium.db")
+    table = ["KELPIUM(ID INT, KELPIUM INT default 0)",
+             "DAILY_KELPIUM(ID INT, KELPIUM INT default 0,DATETIME TEXT)"]
+    Datebase.create_table("kelpium.db", table)
     pass
 
 

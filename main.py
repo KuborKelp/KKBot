@@ -1,6 +1,6 @@
-import public.datebase as datebase
-import public.message as message
-import public.parser as parser
+import public.datebase as Datebase
+import public.message as Message
+import public.parser as Parser
 import os
 import importlib
 import sys
@@ -18,10 +18,24 @@ def load_modules():
     for mod in mods:
         modules[mod] = __import__("kelpium")
         info = modules["kelpium"]._info()
+        modules["kelpium"]._initialize()
         headers[mod] = info[0]
         s_headers[mod] = info[1]
 
     print(mods)
+
+
+def distribute(msg, header, s_header, para, info):
+    result = None
+    if header:
+        for h in headers.keys():
+            if header in headers[h]:
+                result = modules[h].exchange(msg, header, s_header, para, info)
+    elif s_header:
+        for h in s_headers.keys():
+            if header in s_headers[h]:
+                result = modules[h].exchange(msg, header, s_header, para, info)
+    return result
 
 
 if __name__ == '__main__':
@@ -31,5 +45,17 @@ if __name__ == '__main__':
 
     while True:
         msg = input("msg::")
-        print("nm22sl")
+        msg = Message.MessageChain()
+        msg.append(Message.Text("#kp"))
+        msg = msg.tostr()
+        print("tostr:", msg)
+
+        header = Parser.match_header(msg, "#")
+        s_header = Parser.match_header(msg, "")
+        para = Parser.parameter(msg)
+        member = {"id": 114514, "name": "kelpman"}
+        group = {"id": 1919810, "name": "kkbothome"}
+        info = [member, group]
+        result = distribute(msg, header=header, s_header=s_header, para=para, info=info)
+        print("result::", result)
     pass

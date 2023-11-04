@@ -12,7 +12,10 @@ def match_header(message, tag="#"):
 
 def parameter(message):
     paras = []  # 每个参数 [<type>,<para>] type为0为普通参数 type为1为特殊参数
-    message = message.split(" ", 1)[1]
+
+    message = message.split(" ", 1)
+    if len(message) > 1:
+        message = message[1]
     flag = False
 
     name = ""
@@ -35,7 +38,7 @@ def parameter(message):
                 name = ""
                 para = ""
             elif not name:
-                return "errors:para name not included"
+                raise "errors:para name not included"
             else:
                 flag = True
     return paras

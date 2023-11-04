@@ -1,8 +1,8 @@
-'''
+"""
 
     构建消息链
 
-'''
+"""
 
 
 class MessageChain(object):
