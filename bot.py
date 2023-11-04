@@ -55,7 +55,7 @@ app = Ariadne(
 @bcc.receiver(GroupMessage)
 async def group_message_listener(app: Ariadne, group: Group, message: MessageChain, member: Member,
                                  quote: Quote | None):
-    msg = message.display
+    # msg = message.display
     msg = destruction(message)
     result = None
     header = Parser.match_header(msg, "#")

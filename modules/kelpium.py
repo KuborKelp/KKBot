@@ -15,6 +15,8 @@ s_headers:
 
 import public.datebase as Datebase
 import public.message as Msg
+import datetime
+import random
 
 
 # 必备的bot规范
@@ -41,6 +43,9 @@ def exchange(msg, header=None, s_header=None, para=None, info=None):  # info[0]:
         match header:
             case "#kp" | "kelpium":
                 return kelpium(msg, para, info)
+            case "#signin" | "#sign_in":
+                print(info)
+                return signin(msg, para, info)
             case "#give":
                 pass
             case "#pk":
@@ -65,6 +70,40 @@ def kelpium(msg, para, info):
     result = Msg.MessageChain()
     result.append(Msg.Text(f"{info[0]['id']} has {kelpium}kelpium"))
     return result
+
+
+def signin(msg, para, info):
+    today_kelpium = daily_kelpium(info[0])
+    # kelpium = select_kelpium(info[0])  # info[0]:member_info
+    result = Msg.MessageChain()
+    result.append(Msg.Text(f"{info[0]['id']} 今天获得了{today_kelpium}kelpium"))
+    return result
+
+
+def daily_kelpium(member_info):
+    member_id = member_info["id"]
+
+    time = get_time_today()
+    name_db = "kelpium.db"
+    table = "DAILY_KELPIUM"
+    key = {'ID': str(member_id), 'DATETIME': time}
+
+    result = Datebase.select(name_db=name_db, table=table, key=key)
+    print(result)
+    if not result:
+        daily_kelpium = random.randint(1, 100)
+        key = "(ID,KELPIUM,DATETIME)"
+        values = f"({member_id},{daily_kelpium},{time})"
+        Datebase.insert(name_db=name_db, table=table, key=key, values=values)
+
+
+    else:
+        daily_kelpium = result[0][1]
+    return daily_kelpium
+
+
+def get_time_today():
+    return str(datetime.date.today()).replace('-', '')
 
 
 def select_kelpium(member_info):
