@@ -44,18 +44,18 @@ if __name__ == '__main__':
     print(s_headers)
 
     while True:
-        msg = input("msg::")
+        input_ = input("msg::")
         msg = Message.MessageChain()
-        msg.append(Message.Text("#kp"))
+        msg.append(Message.Text(input_))
         msg = msg.tostr()
-        print("tostr:", msg)
 
         header = Parser.match_header(msg, "#")
         s_header = Parser.match_header(msg, "")
         para = Parser.parameter(msg)
-        member = {"id": 114514, "name": "kelpman"}
-        group = {"id": 1919810, "name": "kkbothome"}
+        member = {"id": "114514", "name": "kelpman"}
+        group = {"id": "1919810", "name": "kkbothome"}
         info = [member, group]
         result = distribute(msg, header=header, s_header=s_header, para=para, info=info)
-        print("result::", result)
+        if result:
+            print("result::", result.tostr())
     pass

@@ -42,7 +42,6 @@ def create_table(name: str, table: list, path=PATH):
     cursor = conn.cursor()
     for t in table:
         cmd = "CREATE TABLE IF NOT EXISTS " + t
-        print(cmd)
         cursor.execute(cmd)
         conn.commit()
 
@@ -50,7 +49,8 @@ def create_table(name: str, table: list, path=PATH):
     conn.close()
 
 
-def select(path_db: str, table: str, key: dict):
+def select(name_db: str, table: str, key: dict, path=PATH):
+    path_db = mergy_path_db(name_db, path)
     conn = sqlite3.connect(path_db)
     cursor = conn.cursor()
 
@@ -74,7 +74,8 @@ def select(path_db: str, table: str, key: dict):
     return result
 
 
-def insert(path_db: str, table: str, key: str, values: str):
+def insert(name_db: str, table: str, key: str, values: str, path=PATH):
+    path_db = mergy_path_db(name_db, path)
     conn = sqlite3.connect(path_db)
     cursor = conn.cursor()
 
@@ -86,7 +87,8 @@ def insert(path_db: str, table: str, key: str, values: str):
     conn.close()
 
 
-def update(path_db: str, table: str, key: list, values: list):
+def update(name_db: str, table: str, key: list, values: list, path=PATH):
+    path_db = mergy_path_db(name_db, path)
     conn = sqlite3.connect(path_db)
     cursor = conn.cursor()
 

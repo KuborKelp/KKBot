@@ -2,6 +2,7 @@
 kelpium 货币系统
 headers:
     #kp #kelpium
+    #signin #sign_in
     #give
     #pk
     #beg
@@ -13,10 +14,12 @@ s_headers:
 '''
 
 import public.datebase as Datebase
+import public.message as Msg
+
 
 # 必备的bot规范
 def _info():
-    headers = ["#kp", "#kelpium", "#give", "#pk", "#beg"]
+    headers = ["#kp", "#kelpium", "#give", "#pk", "#beg", "#signin", "#sign_in"]
     s_headers = ["donate", "accept", "reject", "shot"]  # s_headers = None  捕捉特殊消息
     return [headers, s_headers]
 
@@ -58,8 +61,25 @@ def exchange(msg, header=None, s_header=None, para=None, info=None):  # info[0]:
 
 #  #kp  #kelpium
 def kelpium(msg, para, info):
-    return [["Text", "hELLO wORLD"]]
+    kelpium = select_kelpium(info[0])  # info[0]:member_info
+    result = Msg.MessageChain()
+    result.append(Msg.Text(f"{info[0]['id']} has {kelpium}kelpium"))
+    return result
 
 
-def te():
-    return "11121"
+def select_kelpium(member_info):
+    member_id = member_info["id"]
+    # member_name = member_info["name"]
+
+    name_db = "kelpium.db"
+    table = "KELPIUM"
+    key = {"ID": member_id}
+    result = Datebase.select(name_db=name_db, table=table, key=key)
+    if not result:
+        key = "(ID,KELPIUM)"
+        values = f"({member_id},{0})"
+        Datebase.insert(name_db=name_db, table=table, key=key, values=values)
+        result = 0
+    else:
+        result = result[0][1]
+    return result
