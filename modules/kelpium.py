@@ -1,14 +1,7 @@
-'''
-<<<<<<< HEAD
-kelpium 货币系统
-headers:
-    #kp #kelpium
-    #signin #sign_in
-=======
+"""
 kelpium货币系统
 headers:
     #kp #kelpium
->>>>>>> main
     #give
     #pk
     #beg
@@ -17,7 +10,7 @@ s_headers:
     accept
     reject
     shot
-'''
+"""
 
 import public.datebase as Datebase
 import public.message as Msg
