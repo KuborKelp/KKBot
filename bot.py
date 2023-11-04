@@ -103,7 +103,11 @@ def construct(msg):
         value = element[1]
         match key:
             case "Text":
-                msgchain.append(Plain(value))
+                msgchain.append(Plain(text=value))
+            case "Image":
+                msgchain.append(Image(path=value))
+            case "At":
+                msgchain.append(At(target=value))
     return msgchain
 
 
