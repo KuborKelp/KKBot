@@ -31,5 +31,5 @@ if __name__ == '__main__':
 
     while True:
         msg = input("msg::")
-        print("nmsl")
+        print("nm22sl")
     pass
