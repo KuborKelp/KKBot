@@ -22,6 +22,8 @@ headers = {}
 s_headers = {}
 modules = {}
 
+with open('config.txt', 'r') as cf:
+    qq = int(cf.readline().replace('\n', ''))
 
 def load_modules():
     sys.path.append(PATH_MODULES)
@@ -39,7 +41,7 @@ load_modules()
 bcc = create(Broadcast)
 app = Ariadne(
     connection=config(
-        3553949758,  # 你的机器人的 qq 号
+        qq,  # 你的机器人的 qq 号
         "ServiceVerifyKey",  # 填入你的 mirai-api-http 配置中的 verifyKey
         # 以下两行代码（不含注释）里的 host 参数的地址
         # 是你的 mirai-api-http 地址中的地址与端口
