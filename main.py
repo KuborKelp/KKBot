@@ -58,4 +58,3 @@ if __name__ == '__main__':
         result = distribute(msg, header=header, s_header=s_header, para=para, info=info)
         if result:
             print("result::", result.tostr())
-        pass
