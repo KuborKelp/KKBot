@@ -22,8 +22,9 @@ headers = {}
 s_headers = {}
 modules = {}
 
-with open('config.txt', 'r') as cf:
-    qq = int(cf.readline().replace('\n', ''))
+# with open('config.txt', 'r') as cf:
+#     qq = int(cf.readline().replace('\n', ''))
+qq = 3553949758
 
 def load_modules():
     sys.path.append(PATH_MODULES)
