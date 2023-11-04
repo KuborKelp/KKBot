@@ -44,7 +44,6 @@ def exchange(msg, header=None, s_header=None, para=None, info=None):  # info[0]:
             case "#kp" | "kelpium":
                 return kelpium(msg, para, info)
             case "#signin" | "#sign_in":
-                print(info)
                 return signin(msg, para, info)
             case "#give":
                 pass
@@ -73,8 +72,7 @@ def kelpium(msg, para, info):
 
 
 def signin(msg, para, info):
-    today_kelpium = daily_kelpium(info[0])
-    # kelpium = select_kelpium(info[0])  # info[0]:member_info
+    today_kelpium, kelpium = daily_kelpium(info[0])
     result = Msg.MessageChain()
     result.append(Msg.Text(f"{info[0]['id']} 今天获得了{today_kelpium}kelpium"))
     return result
@@ -82,6 +80,7 @@ def signin(msg, para, info):
 
 def daily_kelpium(member_info):
     member_id = member_info["id"]
+    kelpium = select_kelpium(member_info)  # info[0]:member_info
 
     time = get_time_today()
     name_db = "kelpium.db"
@@ -89,16 +88,20 @@ def daily_kelpium(member_info):
     key = {'ID': str(member_id), 'DATETIME': time}
 
     result = Datebase.select(name_db=name_db, table=table, key=key)
-    print(result)
     if not result:
         daily_kelpium = random.randint(1, 100)
         key = "(ID,KELPIUM,DATETIME)"
         values = f"({member_id},{daily_kelpium},{time})"
         Datebase.insert(name_db=name_db, table=table, key=key, values=values)
 
+        kelpium += daily_kelpium
+        table = "KELPIUM"
+        key = ['ID', member_id]
+        values = ["KELPIUM", kelpium]
+        Datebase.update(name_db=name_db, table=table, key=key, values=values)
     else:
         daily_kelpium = result[0][1]
-    return daily_kelpium
+    return daily_kelpium, kelpium
 
 
 def get_time_today():
