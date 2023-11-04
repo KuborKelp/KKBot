@@ -1,8 +1,14 @@
 '''
+<<<<<<< HEAD
 kelpium 货币系统
 headers:
     #kp #kelpium
     #signin #sign_in
+=======
+kelpium货币系统
+headers:
+    #kp #kelpium
+>>>>>>> main
     #give
     #pk
     #beg
@@ -22,8 +28,12 @@ import random
 # 必备的bot规范
 def _info():
     headers = ["#kp", "#kelpium", "#give", "#pk", "#beg", "#signin", "#sign_in"]
+
+
+# 必备的bot规范
+def _info():
+    headers = ["#kp", "#kelpium", "#give", "#pk", "#beg"]
     s_headers = ["donate", "accept", "reject", "shot"]  # s_headers = None  捕捉特殊消息
-    return [headers, s_headers]
 
 
 # 初始化
@@ -32,7 +42,6 @@ def _initialize():
     table = ["KELPIUM(ID INT, KELPIUM INT default 0)",
              "DAILY_KELPIUM(ID INT, KELPIUM INT default 0,DATETIME TEXT)"]
     Datebase.create_table("kelpium.db", table)
-    pass
 
 
 # 交换msg
