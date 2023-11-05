@@ -52,6 +52,8 @@ if __name__ == '__main__':
         header = Parser.match_header(msg, "#")
         s_header = Parser.match_header(msg, "")
         para = Parser.parameter(msg)
+        print("?msg?=", msg)
+        print(para)
         member = {"id": "114514", "name": "kelpman"}
         group = {"id": "1919810", "name": "kkbothome"}
         info = [member, group]

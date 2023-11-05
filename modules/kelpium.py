@@ -63,16 +63,24 @@ def exchange(msg, header=None, s_header=None, para=None, info=None):  # info[0]:
 
 #  #kp  #kelpium
 def kelpium(msg, para, info):
-    kelpium = select_kelpium(info[0])  # info[0]:member_info
-    result = Msg.MessageChain()
-    result.append(Msg.Text(f"{info[0]['id']} 拥有 {kelpium}kelpium"))
+    result = None
+    match len(para):
+        case 0:
+            kelpium = select_kelpium(info[0])  # info[0]:member_info
+            result = Msg.MessageChain()
+            result.append(Msg.Text(f"{info[0]['name']} 拥有 {kelpium}kelpium"))
+        case 1:
+            if para[0][0] == 0 and para[0][1] == "ranking":
+                ranking = get_kelpium_ranking(info[1])
+                result = Msg.MessageChain()
+                result.append(Msg.Text(ranking))
     return result
 
 
 def signin(msg, para, info):
     today_kelpium, kelpium = daily_kelpium(info[0])
     result = Msg.MessageChain()
-    result.append(Msg.Text(f"{info[0]['id']} 今天获得了{today_kelpium}kelpium"))
+    result.append(Msg.Text(f"{info[0]['name']} 今天获得了{today_kelpium}kelpium"))
     return result
 
 
@@ -121,4 +129,33 @@ def select_kelpium(member_info):
         result = 0
     else:
         result = result[0][1]
+    return result
+
+
+def get_kelpium_ranking(group_info):
+    group_id = group_info["id"]
+    member_list = group_info["members"]
+    name_db = "kelpium.db"
+    table = "KELPIUM"
+
+    ranking = []
+
+    for m in member_list:
+        member_info = [{"id": m.id}]
+        result = select_kelpium(member_info)
+
+        kelpium = result[0][1]
+        i = 0
+        for i in range(0, len(ranking)):
+            if ranking[i][1] <= kelpium:
+                break
+        else:
+            i += 1
+        ranking.insert(i, [m.name, kelpium])
+
+    result = "=====KELPIUM-RANKING=====\n KELPIUM   NAME"
+    for r in ranking:
+        kelpium_len = len(r[1])
+        result += " " * (9 - kelpium_len) + "  " + str(r[0]) + "\n"
+    result += "========================="
     return result

@@ -15,7 +15,7 @@ def parameter(message):
 
     message = message.split(" ", 1)
     if len(message) > 1:
-        message = message[1]
+        message = message[1] + ' '
     flag = False
 
     name = ""

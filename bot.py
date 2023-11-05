@@ -62,8 +62,10 @@ async def group_message_listener(app: Ariadne, group: Group, message: MessageCha
     header = Parser.match_header(msg, "#")
     s_header = Parser.match_header(msg, "")
     para = Parser.parameter(msg)
+
     new_member = {"id": member.id, "name": member.name}
-    new_group = {"id": group.id, "name": group.name}
+    members_list = await app.get_member_list(group)
+    new_group = {"id": group.id, "name": group.name, "members": members_list}
     info = [new_member, new_group]
     result = distribute(msg, header=header, s_header=s_header, para=para, info=info)
     if result:
