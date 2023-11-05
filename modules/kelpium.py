@@ -39,7 +39,7 @@ def exchange(msg, header=None, s_header=None, para=None, info=None):  # info[0]:
         pass
     if header:
         match header:
-            case "#kp" | "kelpium":
+            case "#kp" | "#kelpium":
                 return kelpium(msg, para, info)
             case "#signin" | "#sign_in":
                 return signin(msg, para, info)
