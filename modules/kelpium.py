@@ -156,6 +156,6 @@ def get_kelpium_ranking(group_info):
     result = "=====KELPIUM-RANKING=====\n KELPIUM   NAME\n"
     for r in ranking:
         kelpium_len = len(str(r[1]))
-        result += str(r[1]) + " " * (9 - kelpium_len) + "  " + r[0] + "\n"
+        result += str(r[1]) + " " * (12 - kelpium_len) + "  " + r[0] + "\n"
     result += "========================="
     return result
