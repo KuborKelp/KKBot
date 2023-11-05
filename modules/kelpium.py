@@ -20,7 +20,7 @@ import random
 
 # 必备的bot规范
 def _info():
-    headers = ["#kp", "#kelpium", "#give", "#pk", "#beg"]
+    headers = ["#kp", "#kelpium", "#give", "#pk", "#beg", "#signin", "#sign_in"]
     s_headers = ["donate", "accept", "reject", "shot"]  # s_headers = None  捕捉特殊消息
     return [headers, s_headers]
 
