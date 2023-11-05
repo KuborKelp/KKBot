@@ -134,7 +134,7 @@ def select_kelpium(member_info):
 
 def get_kelpium_ranking(group_info):
     # group_id = group_info["id"]
-    member_list = group_info[0]["members"]
+    member_list = group_info["members"]
     name_db = "kelpium.db"
     table = "KELPIUM"
 
