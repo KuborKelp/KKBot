@@ -149,11 +149,11 @@ def get_kelpium_ranking(group_info):
                 break
         else:
             i += 1
-        ranking.insert(i, [m.name, kelpium])
+        ranking.insert(i, [m.name, str(kelpium)])
 
     result = "=====KELPIUM-RANKING=====\n KELPIUM   NAME"
     for r in ranking:
         kelpium_len = len(r[1])
-        result += " " * (9 - kelpium_len) + "  " + str(r[0]) + "\n"
+        result += " " * (9 - kelpium_len) + r[1] + "  " + r[0] + "\n"
     result += "========================="
     return result
