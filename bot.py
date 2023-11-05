@@ -62,9 +62,9 @@ async def group_message_listener(app: Ariadne, group: Group, message: MessageCha
     header = Parser.match_header(msg, "#")
     s_header = Parser.match_header(msg, "")
     para = Parser.parameter(msg)
-    member = {"id": "114514", "name": "kelpman"}
-    group = {"id": "1919810", "name": "kkbothome"}
-    info = [member, group]
+    new_member = {"id": member.id, "name": member.name}
+    new_group = {"id": group.id, "name": group.name}
+    info = [new_member, new_group]
     result = distribute(msg, header=header, s_header=s_header, para=para, info=info)
     if result:
         msgchain = construct(result)
@@ -98,16 +98,25 @@ def destruction(message):
 
 def construct(msg):
     msgchain = MessageChain([])
-    for element in msg:
-        key = element[0]
-        value = element[1]
-        match key:
+    # for element in msg.lst:
+    #     key = element[0]
+    #     value = element[1]
+    #     match key:
+    #         case "Text":
+    #             msgchain.append(Plain(text=value))
+    #         case "Image":
+    #             msgchain.append(Image(path=value))
+    #         case "At":
+    #             msgchain.append(At(target=value))
+    for element in msg.lst:
+        match element.type:
             case "Text":
-                msgchain.append(Plain(text=value))
+                msgchain.append(Plain(text=element.text))
             case "Image":
-                msgchain.append(Image(path=value))
+                msgchain.append(Image(path=element.url))
             case "At":
-                msgchain.append(At(target=value))
+                msgchain.append(At(target=element.target))
+
     return msgchain
 
 

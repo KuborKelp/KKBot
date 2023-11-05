@@ -65,7 +65,7 @@ def exchange(msg, header=None, s_header=None, para=None, info=None):  # info[0]:
 def kelpium(msg, para, info):
     kelpium = select_kelpium(info[0])  # info[0]:member_info
     result = Msg.MessageChain()
-    result.append(Msg.Text(f"{info[0]['id']} has {kelpium}kelpium"))
+    result.append(Msg.Text(f"{info[0]['id']} 拥有 {kelpium}kelpium"))
     return result
 
 
