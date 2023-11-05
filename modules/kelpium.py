@@ -144,6 +144,8 @@ def get_kelpium_ranking(group_info):
         member_info = {"id": m.id}
         kelpium = select_kelpium(member_info)
         i = 0
+        if not kelpium:
+            continue
         for i in range(0, len(ranking)):
             if ranking[i][1] <= kelpium:
                 break
@@ -151,7 +153,7 @@ def get_kelpium_ranking(group_info):
             i += 1
         ranking.insert(i, [m.name, kelpium])
 
-    result = "=====KELPIUM-RANKING=====\n KELPIUM   NAME"
+    result = "=====KELPIUM-RANKING=====\n KELPIUM   NAME\n"
     for r in ranking:
         kelpium_len = len(str(r[1]))
         result += " " * (9 - kelpium_len) + str(r[1]) + "  " + r[0] + "\n"
