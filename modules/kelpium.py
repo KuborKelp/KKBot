@@ -142,9 +142,7 @@ def get_kelpium_ranking(group_info):
 
     for m in member_list:
         member_info = {"id": m.id}
-        result = select_kelpium(member_info)
-
-        kelpium = result[0][1]
+        kelpium = select_kelpium(member_info)
         i = 0
         for i in range(0, len(ranking)):
             if ranking[i][1] <= kelpium:
