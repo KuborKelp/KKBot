@@ -53,7 +53,7 @@ if __name__ == '__main__':
         s_header = Parser.match_header(msg, "")
         para = Parser.parameter(msg)
         print("?msg?=", msg)
-        member = {"id": "114514", "name": "kelpman"}
+        member = {"id": "1114514", "name": "kelpman"}
         group = {"id": "1919810", "name": "kkbothome"}
         info = [member, group]
         result = distribute(msg, header=header, s_header=s_header, para=para, info=info)
