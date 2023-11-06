@@ -98,7 +98,7 @@ def daily_kelpium(member_info):
         daily_kelpium = random.randint(1, 100)
         key = "(ID,KELPIUM,DATETIME)"
         values = f"({member_id},{daily_kelpium},{time})"
-        Datebase.insert(name_db=name_db, table=table, key=key, values=values)
+        Datebase.insert(name_db=name_db, table=table, key=key, value=values)
 
         kelpium += daily_kelpium
         table = "KELPIUM"
@@ -125,7 +125,7 @@ def select_kelpium(member_info):
     if not result:
         key = "(ID,KELPIUM)"
         values = f"({member_id},{0})"
-        Datebase.insert(name_db=name_db, table=table, key=key, values=values)
+        Datebase.insert(name_db=name_db, table=table, key=key, value=values)
         result = 0
     else:
         result = result[0][1]

@@ -74,12 +74,12 @@ def select(name_db: str, table: str, key: dict, path=PATH):
     return result
 
 
-def insert(name_db: str, table: str, key: str, values: str, path=PATH):
+def insert(name_db: str, table: str, key: str, value: str, path=PATH):
     path_db = mergy_path_db(name_db, path)
     conn = sqlite3.connect(path_db)
     cursor = conn.cursor()
 
-    cmd = f'INSERT INTO {table} {key} VALUES {values}'
+    cmd = f'INSERT INTO {table} {key} VALUES {value}'
     cursor.execute(cmd)
     conn.commit()
 
@@ -93,6 +93,19 @@ def update(name_db: str, table: str, key: list, values: list, path=PATH):
     cursor = conn.cursor()
 
     cmd = f'UPDATE {table} SET {values[0]} = {values[1]} WHERE {key[0]}={key[1]}'
+    cursor.execute(cmd)
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+
+
+def delete(name_db: str, table: str, key: str, value: str, path=PATH):
+    path_db = mergy_path_db(name_db, path)
+    conn = sqlite3.connect(path_db)
+    cursor = conn.cursor()
+
+    cmd = f'DELETE FROM {table} WHERE {key}={value}'
     cursor.execute(cmd)
     conn.commit()
 
