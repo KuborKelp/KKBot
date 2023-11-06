@@ -16,9 +16,9 @@ def load_modules():
     mods = os.listdir(PATH_MODULES)
     mods = [i[:-3] for i in mods if i.endswith(".py")]
     for mod in mods:
-        modules[mod] = __import__("kelpium")
-        info = modules["kelpium"]._info()
-        modules["kelpium"]._initialize()
+        modules[mod] = __import__(mod)
+        info = modules[mod]._info()
+        modules[mod]._initialize()
         headers[mod] = info[0]
         s_headers[mod] = info[1]
 
@@ -33,7 +33,7 @@ def distribute(msg, header, s_header, para, info):
                 result = modules[h].exchange(msg, header, s_header, para, info)
     elif s_header:
         for h in s_headers.keys():
-            if header in s_headers[h]:
+            if s_header in s_headers[h]:
                 result = modules[h].exchange(msg, header, s_header, para, info)
     return result
 
@@ -53,7 +53,6 @@ if __name__ == '__main__':
         s_header = Parser.match_header(msg, "")
         para = Parser.parameter(msg)
         print("?msg?=", msg)
-        print(para)
         member = {"id": "114514", "name": "kelpman"}
         group = {"id": "1919810", "name": "kkbothome"}
         info = [member, group]

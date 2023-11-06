@@ -32,8 +32,8 @@ def load_modules():
     mods = [i[:-3] for i in mods if i.endswith(".py")]
     for mod in mods:
         modules[mod] = __import__("kelpium")
-        info = modules["kelpium"]._info()
-        modules["kelpium"]._initialize()
+        info = modules[mod]._info()
+        modules[mod]._initialize()
         headers[mod] = info[0]
         s_headers[mod] = info[1]
 
@@ -100,16 +100,6 @@ def destruction(message):
 
 def construct(msg):
     msgchain = MessageChain([])
-    # for element in msg.lst:
-    #     key = element[0]
-    #     value = element[1]
-    #     match key:
-    #         case "Text":
-    #             msgchain.append(Plain(text=value))
-    #         case "Image":
-    #             msgchain.append(Image(path=value))
-    #         case "At":
-    #             msgchain.append(At(target=value))
     for element in msg.lst:
         match element.type:
             case "Text":
