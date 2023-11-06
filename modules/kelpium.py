@@ -60,7 +60,6 @@ def exchange(msg, header=None, s_header=None, para=None, info=None):  # info[0]:
             case "donate":
                 pass
             case "accept":
-                print(msg)
                 if msg == "accept":
                     return accept_pk(msg, para, info)
             case "shot":
@@ -195,14 +194,18 @@ def shot(msg, para, info):
         elif pk_list and pk_list[0] == 1:
 
             player_id = str(info[0]["id"])
-            host = str(pk_list[1][0][2])
+            host_id = str(pk_list[1][0][2])
+
+            if player_id != host_id:
+                result.append(Msg.Text("别乱射,谢谢你"))
+                return result
 
             kelpium = pk_list[1][0][1]  # 赌金
-            host_id = pk_list[1][0][2]  # 当前开枪者
+            # host_id = pk_list[1][0][2]  # 当前开枪者
             player_id = pk_list[1][0][3]  # 另一个玩家
             round = pk_list[1][0][5]
 
-            if player_id == str(host_id):
+            if player_id == host_id:
                 # 先删除对局,如果游戏没结束再添加回去
                 name_db = "kelpium.db"
                 table = "PK_QUEUE"
