@@ -81,7 +81,7 @@ def distribute(msg, header, s_header, para, info):
                 result = modules[h].exchange(msg, header, s_header, para, info)
     elif s_header:
         for h in s_headers.keys():
-            if header in s_headers[h]:
+            if s_header in s_headers[h]:
                 result = modules[h].exchange(msg, header, s_header, para, info)
     return result
 
