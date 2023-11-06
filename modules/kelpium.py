@@ -60,7 +60,6 @@ def exchange(msg, header=None, s_header=None, para=None, info=None):  # info[0]:
             case "donate":
                 pass
             case "accept":
-                print(msg)
                 if msg == "accept":
                     return accept_pk(msg, para, info)
             case "shot":

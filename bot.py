@@ -31,7 +31,7 @@ def load_modules():
     mods = os.listdir(PATH_MODULES)
     mods = [i[:-3] for i in mods if i.endswith(".py")]
     for mod in mods:
-        modules[mod] = __import__("kelpium")
+        modules[mod] = __import__(mod)
         info = modules[mod]._info()
         modules[mod]._initialize()
         headers[mod] = info[0]
