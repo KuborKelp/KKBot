@@ -60,6 +60,7 @@ def exchange(msg, header=None, s_header=None, para=None, info=None):  # info[0]:
             case "donate":
                 pass
             case "accept":
+                print(msg)
                 if msg == "accept":
                     return accept_pk(msg, para, info)
             case "shot":
@@ -149,7 +150,7 @@ def accept_pk(msg, para, info):
     if pk_queue or pk_list:  # 检测是否 占用队列/游戏
         if pk_queue == [0] or pk_list == [0]:
             result.append(Msg.Text(f"上一场对局超时120s!已强制结束!"))
-        elif (pk_list and pk_list[0] == 1):
+        elif pk_list and pk_list[0] == 1:
             list_host = pk_list[1][0][2]
             result.append(Msg.Text(f"{list_host}发起的pk正在进行中!"))
             return result
@@ -219,6 +220,7 @@ def shot(msg, para, info):
                     Datebase.insert(name_db=name_db, table=table, key=key, value=values)
                     result.append(f"GG概率为{PROBABILTY[0]}%")
                     return result
+
 
 def daily_kelpium(member_info):
     member_id = member_info["id"]
